@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Command to Minecraft Server</title>
+</head>
+<body>
+    <h1>Send Command to Minecraft Server</h1>
+    <form action="/ip_input" method="POST" id="ip-input">
+
+        <label for="ip">Server IP: </label>
+        <input type="text" id="ip" name="ip" required>
+        <label for="port">Port: </label>
+        <input type="number" id="port" name="port" required>
+        <label for="password">Password: </label>
+        <input type="password" id="password" name="password">
+        <input type="checkbox" id="hasPassword" checked>
+        <input type="submit" value="Connect">
+
+    </form>
+
+    <form>
+        <div>summon creeper </div>
+        <button type="button" class="summon_btn" id="creeper"> summon creeper </button>
+        <div>summon zombie </div>
+        <button type="button" class="summon_btn" id="zombie"> summon zombie </button>
+        <div>summon skeleton </div>
+        <button type="button" class="summon_btn" id="skeleton"> summon skeleton </button>
+        <div>summon spider </div>
+        <button type="button" class="summon_btn" id="spider"> summon spider </button>
+    </form>
+
+    <!-- <form action="/send_command" method="POST" id="custom-command">
+        <label for="command">Command:</label>
+        <input type="text" id="command" name="command" required>
+        <input type="submit" value="Send">
+    </form> -->
+    <div id="response"> console output: </div>
+
+    <script>
+        const buttons = document.querySelectorAll('.summon_btn');
+        buttons.forEach(button => {
+            // Add event listener to each button, preventing form submission
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const mobType = button.id;
+                fetch('/summonMob', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ mobType: mobType })
+                })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').innerText = "Console output: " + data.response;
+            })
+            .catch(error => console.error('Error:', error));
+            
+            });
+        });
+    
+    </script>
+
+
+</body>
+</html>
