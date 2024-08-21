@@ -69,17 +69,15 @@ app.post('/ip_input',  (req, res) => {
     } else {
         rcon.connect(ip, port);
     }
-
+    
 
 });
-
-
 
 app.post('/summonMob', (req, res) => {
     const mobType = req.body.mobType;
 
     console.log(mobType);
-    
+
     console.log(`sending command for ${mobType}....`);
 
     if (authenticated) {

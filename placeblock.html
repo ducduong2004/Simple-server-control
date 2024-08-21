@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <form action="/input" method="POST" id="ip-input">
+        <label> INPUT YOUR COORDINATE </label>
+        <div> X: <input type="text" id="coordinate" name="X" placeholder="X"> </div>
+        <div> Y: <input type="text" id="coordinate2" name="Y" placeholder="Y"> </div>
+        <div> Z:  <input type="text" id="coordinate3" name="Z" placeholder="Z"> </div>
+        <select id="myDropdown" name="blockType">
+          <option value="">--Please choose an option--</option>
+        </select>
+        
+        <script>
+          // Load the JSON file
+          fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+              // Create the options for the dropdown box
+              const dropdown = document.getElementById('myDropdown');
+              data.forEach(item => {
+                const option = document.createElement('option');
+                option.text = item.value;
+                option.value = item.value;
+                dropdown.appendChild(option);
+              });
+            });
+        </script>
+
+        
+        <input type="submit" value="Submit">
+    </form>
+
+    
+   
+
+
+
+
+    
+</body>
+</html>
